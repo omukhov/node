@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>Hello World</h1>
+    <form action="/submit" method="POST">
+        <input name="firstName" />
+        <input name="lastName" />
+        <button>Submit</button>
+    </form>
+
+    <section>
+        <h2>User Info:</h2>
+        <div>Name is <%= admin.name %>
+        </div>
+        <div>Age is <%= admin.age %>
+        </div>
+    </section>
+    <a href="/download/bet.png">
+   <img src="/bet.png" alt="bet" width="300">
+</a>
+
+    
+    <section>
+        <h2>Cats:</h2>
+        <% for (let user of users) { %>
+            <div>
+                <li><%= user %></li>
+            </div>
+        <% } %>
+    </section>
+
+
+
+</body>
+
+</html>
