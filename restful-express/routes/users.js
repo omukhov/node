@@ -1,13 +1,19 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 
-const users = require("../data/users");
-const error = require("../utilities/error");
+import users from "../data/users.js";
+import posts from "../data/posts.js";
+import error from "../utilities/error.js";
 
 router
   .route("/")
   .get((req, res) => {
     const links = [
+      {
+        href: "users/:id/posts",
+        rel: "posts",
+        type: "GET",
+      },
       {
         href: "users/:id",
         rel: ":id",
@@ -34,6 +40,14 @@ router
       res.json(users[users.length - 1]);
     } else next(error(400, "Insufficient Data"));
   });
+
+router.route("/:id/posts").get((req, res) => {
+  const userPosts = posts.filter((p) => req.params.id == p.userId);
+  console.log(userPosts);
+  res.json({
+    message: userPosts,
+  });
+});
 
 router
   .route("/:id")
@@ -81,4 +95,4 @@ router
     else next();
   });
 
-module.exports = router;
+export default router;

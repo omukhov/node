@@ -1,12 +1,16 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 
-const posts = require("../data/posts");
-const error = require("../utilities/error");
+import posts from "../data/posts.js";
+import error from "../utilities/error.js";
 
 router
   .route("/")
   .get((req, res) => {
+    const userId = Number(req.query.userId);
+    const filteredPosts = posts.filter((p) => userId === p.userId);
+    console.log(userId);
+    console.log(filteredPosts);
     const links = [
       {
         href: "posts/:id",
@@ -15,7 +19,9 @@ router
       },
     ];
 
-    res.json({ posts, links });
+    const resultPosts = userId ? filteredPosts : posts;
+
+    res.json({ resultPosts, links });
   })
   .post((req, res, next) => {
     if (req.body.userId && req.body.title && req.body.content) {
@@ -77,4 +83,4 @@ router
     else next();
   });
 
-module.exports = router;
+export default router;

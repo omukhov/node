@@ -1,17 +1,17 @@
-const express = require("express");
-const bodyParser = require("body-parser");
+import express from "express";
 
-const users = require("./routes/users");
-const posts = require("./routes/posts");
+import users from "./routes/users.js";
+import posts from "./routes/posts.js";
+import comments from "./routes/comments.js";
 
-const error = require("./utilities/error");
+import error from "./utilities/error.js";
 
 const app = express();
-const port = 3000;
+const port = 3002;
 
 // Parsing Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Logging Middlewaare
 app.use((req, res, next) => {
@@ -29,7 +29,7 @@ ${time.toLocaleTimeString()}: Received a ${req.method} request to ${req.url}.`,
 });
 
 // Valid API Keys.
-apiKeys = ["perscholas", "ps-example", "hJAsknw-L198sAJD-l3kasx"];
+const apiKeys = ["perscholas", "ps-example", "hJAsknw-L198sAJD-l3kasx"];
 
 // New middleware to check for API keys!
 // Note that if the key is not verified,
@@ -53,6 +53,7 @@ app.use("/api", function (req, res, next) {
 // Use our Routes
 app.use("/api/users", users);
 app.use("/api/posts", posts);
+app.use("/api/comments", comments);
 
 // Adding some HATEOAS links.
 app.get("/", (req, res) => {
@@ -89,6 +90,16 @@ app.get("/api", (req, res) => {
       {
         href: "api/posts",
         rel: "posts",
+        type: "POST",
+      },
+      {
+        href: "api/comments",
+        rel: "comments",
+        type: "GET",
+      },
+      {
+        href: "api/comments",
+        rel: "comments",
         type: "POST",
       },
     ],
