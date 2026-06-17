@@ -7,6 +7,15 @@ import error from "../utilities/error.js";
 router
   .route("/")
   .get((req, res) => {
+    const userId = Number(req.query.userId);
+    const postId = Number(req.query.postId);
+    const filteredCommentsByUserId = comments.filter(
+      (c) => userId === c.userId,
+    );
+    const filteredCommentsByPostId = comments.filter(
+      (c) => postId === c.postId,
+    );
+
     const links = [
       {
         href: "comments/:id",
@@ -14,7 +23,18 @@ router
         type: "GET",
       },
     ];
-    res.json({ comments, links });
+
+    let resultComments = comments;
+
+    if (filteredCommentsByUserId.length !== 0) {
+      resultComments = filteredCommentsByUserId;
+    } else if (filteredCommentsByPostId.length !== 0) {
+      resultComments = filteredCommentsByPostId;
+    } else {
+      resultComments = comments;
+    }
+
+    res.json({ resultComments, links });
   })
   .post((req, res, next) => {
     if (req.body.userId && req.body.postId && req.body.body) {
@@ -30,48 +50,50 @@ router
     } else next(error(400, "Insufficient Data"));
   });
 
-router.route("/:id").get((req, res, next) => {
-  const comment = comments.find((c) => c.id == req.params.id);
+router
+  .route("/:id")
+  .get((req, res, next) => {
+    const comment = comments.find((c) => c.id == req.params.id);
 
-  const links = [
-    {
-      href: `/${req.params.id}`,
-      rel: "",
-      type: "PATCH",
-    },
-    {
-      href: `/${req.params.id}`,
-      rel: "",
-      type: "DELETE",
-    },
-  ];
+    const links = [
+      {
+        href: `/${req.params.id}`,
+        rel: "",
+        type: "PATCH",
+      },
+      {
+        href: `/${req.params.id}`,
+        rel: "",
+        type: "DELETE",
+      },
+    ];
 
-  if (comment) res.json({ comment, links });
-  else next();
-});
-//   .patch((req, res, next) => {
-//     const post = posts.find((p, i) => {
-//       if (p.id == req.params.id) {
-//         for (const key in req.body) {
-//           posts[i][key] = req.body[key];
-//         }
-//         return true;
-//       }
-//     });
+    if (comment) res.json({ comment, links });
+    else next();
+  })
+  .patch((req, res, next) => {
+    const comment = comments.find((c, i) => {
+      if (c.id == req.params.id) {
+        for (const key in req.body) {
+          comments[i][key] = req.body[key];
+        }
+        return true;
+      }
+    });
 
-//     if (post) res.json(post);
-//     else next();
-//   })
-//   .delete((req, res, next) => {
-//     const post = posts.find((p, i) => {
-//       if (p.id == req.params.id) {
-//         posts.splice(i, 1);
-//         return true;
-//       }
-//     });
+    if (comment) res.json(comment);
+    else next();
+  })
+  .delete((req, res, next) => {
+    const comment = comments.find((c, i) => {
+      if (c.id == req.params.id) {
+        comments.splice(i, 1);
+        return true;
+      }
+    });
 
-//     if (post) res.json(post);
-//     else next();
-//   });
+    if (comment) res.json(comment);
+    else next();
+  });
 
 export default router;

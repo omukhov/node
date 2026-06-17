@@ -3,6 +3,7 @@ const router = express.Router();
 
 import users from "../data/users.js";
 import posts from "../data/posts.js";
+import comments from "../data/comments.js";
 import error from "../utilities/error.js";
 
 router
@@ -43,9 +44,23 @@ router
 
 router.route("/:id/posts").get((req, res) => {
   const userPosts = posts.filter((p) => req.params.id == p.userId);
-  console.log(userPosts);
+
   res.json({
     message: userPosts,
+  });
+});
+
+router.route("/:id/comments").get((req, res) => {
+  const postId = Number(req.query.postId);
+  const userComments = comments.filter(
+    (c) => Number(req.params.id) === c.userId,
+  );
+  const filteredComments = userComments.filter((uc) => postId === uc.postId);
+
+  const resultComments = postId ? filteredComments : userComments;
+
+  res.json({
+    message: resultComments,
   });
 });
 

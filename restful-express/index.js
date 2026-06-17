@@ -7,7 +7,7 @@ import comments from "./routes/comments.js";
 import error from "./utilities/error.js";
 
 const app = express();
-const port = 3002;
+const port = 3001;
 
 // Parsing Middleware
 app.use(express.json());

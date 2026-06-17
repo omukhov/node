@@ -2,6 +2,7 @@ import express from "express";
 const router = express.Router();
 
 import posts from "../data/posts.js";
+import comments from "../data/comments.js";
 import error from "../utilities/error.js";
 
 router
@@ -9,8 +10,6 @@ router
   .get((req, res) => {
     const userId = Number(req.query.userId);
     const filteredPosts = posts.filter((p) => userId === p.userId);
-    console.log(userId);
-    console.log(filteredPosts);
     const links = [
       {
         href: "posts/:id",
@@ -36,6 +35,20 @@ router
       res.json(posts[posts.length - 1]);
     } else next(error(400, "Insufficient Data"));
   });
+
+router.route("/:id/comments").get((req, res) => {
+  const userId = Number(req.query.userId);
+  const postComments = comments.filter(
+    (c) => Number(req.params.id) === c.postId,
+  );
+  const filteredComments = postComments.filter((pc) => userId === pc.userId);
+
+  const resultComments = userId ? filteredComments : postComments;
+
+  res.json({
+    message: resultComments,
+  });
+});
 
 router
   .route("/:id")
