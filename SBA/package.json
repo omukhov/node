@@ -4,12 +4,14 @@
   "description": "sba express",
   "license": "ISC",
   "author": "Artem Omukhov",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "dependencies": {
+    "ejs": "^6.0.1",
     "express": "^5.2.1"
   }
 }

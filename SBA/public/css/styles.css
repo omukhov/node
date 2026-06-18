@@ -1,0 +1,23 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 900px;
+  margin: 40px auto;
+  line-height: 1.6;
+}
+
+h1 {
+  color: #e3350d;
+}
+
+code {
+  background: #f4f4f4;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.endpoint {
+  background: #fafafa;
+  border-left: 4px solid #e3350d;
+  padding: 10px;
+  margin: 10px 0;
+}

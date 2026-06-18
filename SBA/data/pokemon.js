@@ -1,8 +1,8 @@
-const pokemon = [
+const pokemons = [
   {
     id: 1,
     name: "Pikachu",
-    type: ["Electric"],
+    type: [1],
     level: 25,
     hp: 120,
     image:
@@ -12,7 +12,7 @@ const pokemon = [
   {
     id: 2,
     name: "Charizard",
-    type: ["Fire", "Flying"],
+    type: [2, 3],
     level: 42,
     hp: 210,
     image:
@@ -22,7 +22,7 @@ const pokemon = [
   {
     id: 3,
     name: "Blastoise",
-    type: ["Water"],
+    type: [4],
     level: 40,
     hp: 225,
     image: "https://img.pokemondb.net/artwork/large/blastoise.jpg",
@@ -31,7 +31,7 @@ const pokemon = [
   {
     id: 4,
     name: "Venusaur",
-    type: ["Grass", "Poison"],
+    type: [5, 6],
     level: 38,
     hp: 220,
     image: "https://img.pokemondb.net/artwork/large/venusaur.jpg",
@@ -40,7 +40,7 @@ const pokemon = [
   {
     id: 5,
     name: "Gengar",
-    type: ["Ghost", "Poison"],
+    type: [6, 7],
     level: 35,
     hp: 180,
     image:
@@ -50,7 +50,7 @@ const pokemon = [
   {
     id: 6,
     name: "Dragonite",
-    type: ["Dragon", "Flying"],
+    type: [3, 8],
     level: 50,
     hp: 260,
     image: "https://upload.wikimedia.org/wikipedia/en/a/a6/Dragonite.png",
@@ -59,7 +59,7 @@ const pokemon = [
   {
     id: 7,
     name: "Snorlax",
-    type: ["Normal"],
+    type: [9],
     level: 33,
     hp: 320,
     image:
@@ -69,7 +69,7 @@ const pokemon = [
   {
     id: 8,
     name: "Lucario",
-    type: ["Fighting", "Steel"],
+    type: [10, 11],
     level: 37,
     hp: 190,
     image:
@@ -79,7 +79,7 @@ const pokemon = [
   {
     id: 9,
     name: "Jigglypuff",
-    type: ["Normal", "Fairy"],
+    type: [9, 12],
     level: 18,
     hp: 110,
     image:
@@ -89,7 +89,7 @@ const pokemon = [
   {
     id: 10,
     name: "Machamp",
-    type: ["Fighting"],
+    type: [10],
     level: 41,
     hp: 240,
     image: "https://img.pokemondb.net/artwork/large/machamp.jpg",
@@ -98,7 +98,7 @@ const pokemon = [
   {
     id: 11,
     name: "Alakazam",
-    type: ["Psychic"],
+    type: [13],
     level: 39,
     hp: 150,
     image:
@@ -108,7 +108,7 @@ const pokemon = [
   {
     id: 12,
     name: "Onix",
-    type: ["Rock", "Ground"],
+    type: [14, 15],
     level: 28,
     hp: 170,
     image:
@@ -118,7 +118,7 @@ const pokemon = [
   {
     id: 13,
     name: "Lapras",
-    type: ["Water", "Ice"],
+    type: [4, 16],
     level: 34,
     hp: 230,
     image:
@@ -128,7 +128,7 @@ const pokemon = [
   {
     id: 14,
     name: "Eevee",
-    type: ["Normal"],
+    type: [9],
     level: 20,
     hp: 95,
     image: "https://img.pokemondb.net/artwork/large/eevee.jpg",
@@ -136,4 +136,4 @@ const pokemon = [
   },
 ];
 
-export default pokemon;
+export default pokemons;
