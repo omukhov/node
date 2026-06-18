@@ -2,6 +2,7 @@ import express from "express";
 const router = express.Router();
 
 import trainers from "../data/trainer.js";
+import pokemons from "../data/pokemon.js";
 import error from "../utilities/error.js";
 
 router.route("/").get((req, res) => {
@@ -32,7 +33,10 @@ router.route("/").get((req, res) => {
   //   resultComments = comments;
   // }
 
-  res.json(resultTrainers);
+  res.render("trainer", {
+    trainers: resultTrainers,
+    pokemons: pokemons,
+  });
 });
 //   .post((req, res, next) => {
 //     if (req.body.userId && req.body.postId && req.body.body) {

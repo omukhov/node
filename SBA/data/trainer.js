@@ -30,7 +30,7 @@ const trainers = [
     city: "Pallet Town",
     age: 18,
     avatar:
-      "https://static.wikia.nocookie.net/pokemon/images/4/4c/Gary_Oak_anime_The_Beginning.png/revision/latest/scale-to-width/360?cb=20230211081701",
+      "https://i.redd.it/how-strong-do-you-think-the-goat-gary-oak-wouldve-been-if-v0-7mualaskh2tg1.jpg?width=600&format=pjpg&auto=webp&s=d133fcc0a88f6d82cd4202a1cd058a53ff31e17d",
     pokemonIds: [2, 5, 10, 11],
   },
   {
@@ -39,7 +39,7 @@ const trainers = [
     city: "Celestic Town",
     age: 25,
     avatar:
-      "https://static.wikia.nocookie.net/pokemon/images/5/56/Cynthia_anime_Journeys.png/revision/latest?cb=20220727031303",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHaNtRHKuBhLJSea-08_BAE_SipLydWNKytTSwNVeJ8W0TF5bkv4pk0CE&s=10",
     pokemonIds: [6, 8, 14],
   },
 ];

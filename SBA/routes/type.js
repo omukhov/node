@@ -32,7 +32,9 @@ router.route("/").get((req, res) => {
   //   resultComments = comments;
   // }
 
-  res.json(resultTypes);
+  res.render("type", {
+    types: resultTypes,
+  });
 });
 //   .post((req, res, next) => {
 //     if (req.body.userId && req.body.postId && req.body.body) {

@@ -36,19 +36,26 @@
 
 <script>
   document.addEventListener("click", (e) => {
+    // Condition if user press not to button which have class toggle-media
     if (!e.target.classList.contains("toggle-media")) return;
 
+    // go to up from button to parents and find closest parent with class 'pokemon card'
     const card = e.target.closest(".pokemon-card");
     const img = card.querySelector(".pokemon-media");
 
+    // check if img dataset state === image
     const isImage = img.dataset.state === "image";
 
     if (isImage) {
+      // change src to gif
       img.src = img.dataset.gif;
+      // change state to gif
       img.dataset.state = "gif";
       e.target.textContent = "Show Image";
     } else {
+      // change src to img
       img.src = img.dataset.img;
+      // change state to image
       img.dataset.state = "image";
       e.target.textContent = "Show GIF";
     }

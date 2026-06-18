@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 });
 
 // Use our Routes
-app.use("/pokemons", pokemons, types);
+app.use("/pokemons", pokemons);
 app.use("/trainers", trainers);
 app.use("/types", types);
 
