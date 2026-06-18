@@ -2,11 +2,12 @@ import express from "express";
 
 import pokemons from "./routes/pokemon.js";
 import trainers from "./routes/trainer.js";
+import types from "./routes/type.js";
 
 import error from "./utilities/error.js";
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -33,8 +34,9 @@ app.use((req, res, next) => {
 });
 
 // Use our Routes
-app.use("/pokemons", pokemons);
+app.use("/pokemons", pokemons, types);
 app.use("/trainers", trainers);
+app.use("/types", types);
 
 app.get("/", (req, res) => {
   // res.json({
@@ -68,6 +70,18 @@ app.get("/", (req, res) => {
   // });
   res.render("index");
 });
+
+// app.get("/pokemons", (req, res) => {
+//   res.render("pokemon");
+// });
+
+// app.get("/trainers", (req, res) => {
+//   res.render("trainer");
+// });
+
+// app.get("/types", (req, res) => {
+//   res.render("type");
+// });
 
 app.use((req, res, next) => {
   res.status(404).render("not-found");

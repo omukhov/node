@@ -2,6 +2,7 @@ import express from "express";
 const router = express.Router();
 
 import pokemons from "../data/pokemon.js";
+import types from "../data/type.js";
 import error from "../utilities/error.js";
 
 router.route("/").get((req, res) => {
@@ -32,7 +33,10 @@ router.route("/").get((req, res) => {
   //   resultComments = comments;
   // }
 
-  res.json(resultPokemons);
+  res.render("pokemon", {
+    pokemons: resultPokemons,
+    types: types,
+  });
 });
 //   .post((req, res, next) => {
 //     if (req.body.userId && req.body.postId && req.body.body) {

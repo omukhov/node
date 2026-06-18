@@ -1,0 +1,58 @@
+<%- include('partials/header') %>
+
+<div class="container mt-4">
+  <div class="row g-4">
+    <% pokemons.forEach(pokemon => { %>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="card h-100 pokemon-card">
+        <img
+          src="<%= pokemon.image %>"
+          data-img="<%= pokemon.image %>"
+          data-gif="<%= pokemon.gif %>"
+          data-state="image"
+          class="card-img-top pokemon-media"
+          alt="<%= pokemon.name %>"
+        />
+
+        <div class="card-body">
+          <h5 class="card-title"><%= pokemon.name %></h5>
+
+          <p class="card-text">
+            <%= pokemon.type.map(id => { const t = types.find(type => type.id
+            === id); return t ? t.name : "Unknown"; }).join(", ") %>
+          </p>
+
+          <p class="card-text">Level: <%= pokemon.level %></p>
+
+          <p class="card-text">HP: <%= pokemon.hp %></p>
+
+          <button class="btn btn-primary btn-sm toggle-media">Show GIF</button>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("click", (e) => {
+    if (!e.target.classList.contains("toggle-media")) return;
+
+    const card = e.target.closest(".pokemon-card");
+    const img = card.querySelector(".pokemon-media");
+
+    const isImage = img.dataset.state === "image";
+
+    if (isImage) {
+      img.src = img.dataset.gif;
+      img.dataset.state = "gif";
+      e.target.textContent = "Show Image";
+    } else {
+      img.src = img.dataset.img;
+      img.dataset.state = "image";
+      e.target.textContent = "Show GIF";
+    }
+  });
+</script>
+
+<%- include('partials/footer') %>
