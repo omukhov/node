@@ -1,8 +1,8 @@
 import express from "express";
 
-import users from "./routes/users.js";
-import posts from "./routes/posts.js";
-import comments from "./routes/comments.js";
+// import users from "./routes/users.js";
+// import posts from "./routes/posts.js";
+// import comments from "./routes/comments.js";
 
 import error from "./utilities/error.js";
 
