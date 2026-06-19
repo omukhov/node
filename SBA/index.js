@@ -1,5 +1,5 @@
 import express from "express";
-
+import methodOverride from "method-override";
 import pokemons from "./routes/pokemon.js";
 import trainers from "./routes/trainer.js";
 import types from "./routes/type.js";
@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(methodOverride("_method"));
 
 app.use((req, res, next) => {
   const time = new Date();
@@ -33,55 +34,13 @@ app.use((req, res, next) => {
   next();
 });
 
-// Use our Routes
 app.use("/pokemons", pokemons);
 app.use("/trainers", trainers);
 app.use("/types", types);
 
 app.get("/", (req, res) => {
-  // res.json({
-  //   links: [
-  //     {
-  //       href: "/",
-  //       rel: "",
-  //       type: "GET",
-  //     },
-  //     {
-  //       href: "/pokemons",
-  //       rel: "pokemons",
-  //       type: "GET",
-  //     },
-  //     {
-  //       href: "/pokemons",
-  //       rel: "pokemons",
-  //       type: "POST",
-  //     },
-  //     {
-  //       href: "/trainers",
-  //       rel: "trainers",
-  //       type: "GET",
-  //     },
-  //     {
-  //       href: "/trainers",
-  //       rel: "trainers",
-  //       type: "POST",
-  //     },
-  //   ],
-  // });
   res.render("index");
 });
-
-// app.get("/pokemons", (req, res) => {
-//   res.render("pokemon");
-// });
-
-// app.get("/trainers", (req, res) => {
-//   res.render("trainer");
-// });
-
-// app.get("/types", (req, res) => {
-//   res.render("type");
-// });
 
 app.use((req, res, next) => {
   res.status(404).render("not-found");

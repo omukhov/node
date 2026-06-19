@@ -2,6 +2,7 @@ import express from "express";
 const router = express.Router();
 
 import pokemons from "../data/pokemon.js";
+import pokemonDetails from "../data/pokemon-info.js";
 import types from "../data/type.js";
 import error from "../utilities/error.js";
 
@@ -14,14 +15,6 @@ router.route("/").get((req, res) => {
   // const filteredCommentsByPostId = comments.filter(
   //   (c) => postId === c.postId,
   // );
-
-  const links = [
-    {
-      href: "pokemons/:id",
-      rel: ":id",
-      type: "GET",
-    },
-  ];
 
   let resultPokemons = pokemons;
 
@@ -38,64 +31,77 @@ router.route("/").get((req, res) => {
     types: types,
   });
 });
-//   .post((req, res, next) => {
-//     if (req.body.userId && req.body.postId && req.body.body) {
-//       const comment = {
-//         id: comments.length ? comments[comments.length - 1].id + 1 : 1,
-//         userId: req.body.userId,
-//         postId: req.body.postId,
-//         body: req.body.body,
-//       };
 
-//       comments.push(comment);
-//       res.json(comments[comments.length - 1]);
-//     } else next(error(400, "Insufficient Data"));
-//   });
+router.get("/new", (req, res) => {
+  res.render("pokemon-create", { types });
+});
 
-// router
-//   .route("/:id")
-//   .get((req, res, next) => {
-//     const pokemon = comments.find((c) => c.id == req.params.id);
+router.post("/", (req, res, next) => {
+  const typesArray = Array.isArray(req.body.type)
+    ? req.body.type
+    : [req.body.type];
 
-//     const links = [
-//       {
-//         href: `/${req.params.id}`,
-//         rel: "",
-//         type: "PATCH",
-//       },
-//       {
-//         href: `/${req.params.id}`,
-//         rel: "",
-//         type: "DELETE",
-//       },
-//     ];
+  const pokemon = {
+    id: pokemons.length ? pokemons[pokemons.length - 1].id + 1 : 1,
+    name: req.body.name,
+    type: typesArray.map(Number),
+    level: Number(req.body.level),
+    hp: Number(req.body.hp),
+    image: req.body.image,
+    gif: req.body.gif,
+  };
 
-//     if (comment) res.json({ comment, links });
-//     else next();
-//   })
-//   .patch((req, res, next) => {
-//     const comment = comments.find((c, i) => {
-//       if (c.id == req.params.id) {
-//         for (const key in req.body) {
-//           comments[i][key] = req.body[key];
-//         }
-//         return true;
-//       }
-//     });
+  pokemons.push(pokemon);
 
-//     if (comment) res.json(comment);
-//     else next();
-//   })
-//   .delete((req, res, next) => {
-//     const comment = comments.find((c, i) => {
-//       if (c.id == req.params.id) {
-//         comments.splice(i, 1);
-//         return true;
-//       }
-//     });
+  return res.redirect("/pokemons");
+});
 
-//     if (comment) res.json(comment);
-//     else next();
-//   });
+router
+  .route("/:id")
+  .get((req, res, next) => {
+    const pokemonId = Number(req.params.id);
+    const pokemon = pokemonDetails.find((pokemon) => pokemon.id === pokemonId);
+
+    if (pokemonId)
+      res.render("pokemon-info", {
+        pokemon: pokemon,
+      });
+    else next();
+  })
+  .patch((req, res, next) => {
+    const pokemon = pokemons.find((p, i) => {
+      if (p.id == req.params.id) {
+        for (const key in req.body) {
+          if (key === "type") {
+            const types = Array.isArray(req.body.type)
+              ? req.body.type
+              : [req.body.type];
+
+            pokemons[i].type = types.map(Number);
+          } else {
+            pokemons[i][key] = req.body[key];
+          }
+        }
+
+        return true;
+      }
+    });
+
+    if (pokemon) {
+      return res.redirect("/pokemons");
+    } else next();
+  })
+  .delete((req, res, next) => {
+    const pokemon = pokemons.find((p, i) => {
+      if (p.id == req.params.id) {
+        pokemons.splice(i, 1);
+        return true;
+      }
+    });
+
+    if (pokemon) {
+      return res.redirect("/pokemons");
+    } else next();
+  });
 
 export default router;

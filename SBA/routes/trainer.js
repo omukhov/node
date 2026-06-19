@@ -2,6 +2,7 @@ import express from "express";
 const router = express.Router();
 
 import trainers from "../data/trainer.js";
+import trainersDetails from "../data/trainer-info.js";
 import pokemons from "../data/pokemon.js";
 import error from "../utilities/error.js";
 
@@ -14,14 +15,6 @@ router.route("/").get((req, res) => {
   // const filteredCommentsByPostId = comments.filter(
   //   (c) => postId === c.postId,
   // );
-
-  const links = [
-    {
-      href: "trainers/:id",
-      rel: ":id",
-      type: "GET",
-    },
-  ];
 
   let resultTrainers = trainers;
 
@@ -52,27 +45,15 @@ router.route("/").get((req, res) => {
 //     } else next(error(400, "Insufficient Data"));
 //   });
 
-// router
-//   .route("/:id")
-//   .get((req, res, next) => {
-//     const pokemon = comments.find((c) => c.id == req.params.id);
+router.route("/:id").get((req, res, next) => {
+  const trainer = trainersDetails.find((t) => t.id == req.params.id);
 
-//     const links = [
-//       {
-//         href: `/${req.params.id}`,
-//         rel: "",
-//         type: "PATCH",
-//       },
-//       {
-//         href: `/${req.params.id}`,
-//         rel: "",
-//         type: "DELETE",
-//       },
-//     ];
-
-//     if (comment) res.json({ comment, links });
-//     else next();
-//   })
+  if (trainer)
+    res.render("trainer-info", {
+      trainer: trainer,
+    });
+  else next();
+});
 //   .patch((req, res, next) => {
 //     const comment = comments.find((c, i) => {
 //       if (c.id == req.params.id) {

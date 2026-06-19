@@ -5,15 +5,16 @@
     <% pokemons.forEach(pokemon => { %>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card h-100 pokemon-card">
-        <img
-          src="<%= pokemon.image %>"
-          data-img="<%= pokemon.image %>"
-          data-gif="<%= pokemon.gif %>"
-          data-state="image"
-          class="card-img-top pokemon-media"
-          alt="<%= pokemon.name %>"
-        />
-
+        <a href="/pokemons/<%= pokemon.id %>">
+          <img
+            src="<%= pokemon.image %>"
+            data-img="<%= pokemon.image %>"
+            data-gif="<%= pokemon.gif %>"
+            data-state="image"
+            class="card-img-top pokemon-media"
+            alt="<%= pokemon.name %>"
+          />
+        </a>
         <div class="card-body">
           <h5 class="card-title"><%= pokemon.name %></h5>
 
@@ -26,7 +27,104 @@
 
           <p class="card-text">HP: <%= pokemon.hp %></p>
 
-          <button class="btn btn-primary btn-sm toggle-media">Show GIF</button>
+          <div class="d-flex flex-column">
+            <button class="btn btn-primary btn-sm toggle-media m-2">
+              Show GIF
+            </button>
+            <button
+              class="btn btn-info btn-sm text-white m-2"
+              data-bs-toggle="modal"
+              data-bs-target="#editPokemonModal<%= pokemon.id %>"
+            >
+              Update pokemon
+            </button>
+            <form
+              class="m-2"
+              action="/pokemons/<%= pokemon.id %>?_method=DELETE"
+              method="POST"
+            >
+              <button class="btn btn-danger btn-sm w-100">
+                Delete pokemon
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="editPokemonModal<%= pokemon.id %>"
+      tabindex="-1"
+      aria-labelledby="editPokemonModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form
+            action="/pokemons/<%= pokemon.id %>?_method=PATCH"
+            method="POST"
+          >
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="editPokemonModalLabel">
+                Edit Pokemon
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="name"
+                  value="<%= pokemon.name %>"
+                />
+              </div>
+
+              <div class="mb-3">
+                <select class="form-select" name="type" multiple>
+                  <% types.forEach(type => { %>
+                  <% if (pokemon.type.includes(type.id)) { %>
+                  <option value="<%= type.id %>" selected>
+                    <%= type.name %>
+                  </option>
+                  <% } else { %>
+                  <option value="<%= type.id %>"><%= type.name %></option>
+                  <% } %>
+                  <% }) %>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Image URL</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="image"
+                  value="<%= pokemon.image %>"
+                />
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+
+              <button type="submit" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

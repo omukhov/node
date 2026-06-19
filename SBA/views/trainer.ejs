@@ -5,11 +5,13 @@
     <% trainers.forEach(trainer => { %>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card h-100">
-        <img
-          src="<%= trainer.avatar %>"
-          class="card-img-top"
-          alt="<%= trainer.name %>"
-        />
+        <a href="/trainers/<%= trainer.id %>">
+          <img
+            src="<%= trainer.avatar %>"
+            class="card-img-top"
+            alt="<%= trainer.name %>"
+          />
+        </a>
 
         <div class="card-body">
           <h5 class="card-title"><%= trainer.name %></h5>
@@ -18,8 +20,8 @@
 
           <p class="card-text">Age: <%= trainer.age %></p>
           <p class="card-text">
-            <%= trainer.pokemonIds .map(id => pokemons.find(p => p.id ===
-            id)?.name || "Unknown") .join(", ") %>
+            <%= trainer.pokemonIds .map(id => pokemons.find(p => p.id === id))
+            .filter(p => p).map(p => p.name).join(", ") %>
           </p>
         </div>
       </div>

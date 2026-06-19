@@ -1,0 +1,45 @@
+<%- include('partials/header') %>
+
+<div class="container mt-4">
+  <h1>Add Pokemon</h1>
+
+  <form action="/pokemons" method="POST">
+    <div class="mb-3">
+      <label>Name</label>
+      <input class="form-control" name="name" />
+    </div>
+
+    <div class="mb-3">
+      <label>Types</label>
+      <select class="form-select" name="type" multiple>
+        <% types.forEach(type => { %>
+        <option value="<%= type.id %>"><%= type.name %></option>
+        <% }) %>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label>Level</label>
+      <input class="form-control" name="level" />
+    </div>
+
+    <div class="mb-3">
+      <label>HP</label>
+      <input class="form-control" name="hp" />
+    </div>
+
+    <div class="mb-3">
+      <label>Image URL</label>
+      <input class="form-control" name="image" />
+    </div>
+
+    <div class="mb-3">
+      <label>GIF URL</label>
+      <input class="form-control" name="gif" />
+    </div>
+
+    <button class="btn btn-success">Create</button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

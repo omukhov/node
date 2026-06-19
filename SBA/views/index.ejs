@@ -1,11 +1,11 @@
 <%- include('partials/header') %>
 
 <div class="container">
-  <h1 class="mt-5">⚡ Pokemon API</h1>
+  <h1 class="mt-5">Pokemon API</h1>
 
   <p>This is a simple REST API for managing Pokemons, Trainers and Types.</p>
 
-  <h2>📌 Pokemon Endpoints</h2>
+  <h2>Pokemon Endpoints</h2>
 
   <div class="endpoint">
     <p><code>GET /pokemons</code> — get all pokemons</p>
@@ -17,50 +17,22 @@
     <hr />
 
     <p><code>GET /pokemons?type=1</code> — get pokemons by type</p>
-    <p><code>GET /pokemons?trainerId=2</code> — get pokemons of a trainer</p>
   </div>
 
-  <h2>👤 Trainer Endpoints</h2>
+  <h2>Trainer Endpoints</h2>
 
   <div class="endpoint">
     <p><code>GET /trainers</code> — get all trainers</p>
     <p><code>GET /trainers/:id</code> — get trainer by id</p>
-    <p><code>POST /trainers</code> — create trainer</p>
-    <p><code>PATCH /trainers/:id</code> — update trainer</p>
-    <p><code>DELETE /trainers/:id</code> — delete trainer</p>
-
-    <hr />
-
-    <p>
-      <code>GET /trainers/:id?type=1</code> — get trainer's pokemons filtered by
-      type
-    </p>
-    <p>
-      <code>GET /trainers?pokemonId=2</code> — get trainers who own a pokemon
-    </p>
   </div>
 
-  <h2>🏷️ Type Endpoints</h2>
+  <h2>Type Endpoints</h2>
 
   <div class="endpoint">
     <p><code>GET /types</code> — get all types</p>
-    <p><code>GET /types/:id</code> — get type by id</p>
-    <p><code>POST /types</code> — create new type</p>
-    <p><code>PATCH /types/:id</code> — update type</p>
-    <p><code>DELETE /types/:id</code> — delete type</p>
   </div>
 
-  <h2>🔗 Relations (Filtering)</h2>
-
-  <div class="endpoint">
-    <p><code>GET /pokemons?type=1</code> — filter pokemons by type</p>
-    <p><code>GET /pokemons?trainerId=2</code> — filter pokemons by trainer</p>
-    <p>
-      <code>GET /trainers/:id?type=1</code> — filter trainer's pokemons by type
-    </p>
-  </div>
-
-  <h2>🚀 Notes</h2>
+  <h2>Notes</h2>
   <ul>
     <li>All data is stored in memory (mock data)</li>
     <li>No database is used</li>
