@@ -7,28 +7,16 @@ import types from "../data/type.js";
 import error from "../utilities/error.js";
 
 router.route("/").get((req, res) => {
-  // const userId = Number(req.query.userId);
-  // const postId = Number(req.query.postId);
-  // const filteredCommentsByUserId = comments.filter(
-  //   (c) => userId === c.userId,
-  // );
-  // const filteredCommentsByPostId = comments.filter(
-  //   (c) => postId === c.postId,
-  // );
+  const type = Number(req.query.type);
+  let filteredPokemons = pokemons;
 
-  let resultPokemons = pokemons;
-
-  // if (filteredCommentsByUserId.length !== 0) {
-  //   resultComments = filteredCommentsByUserId;
-  // } else if (filteredCommentsByPostId.length !== 0) {
-  //   resultComments = filteredCommentsByPostId;
-  // } else {
-  //   resultComments = comments;
-  // }
+  if (type) {
+    filteredPokemons = pokemons.filter((p) => p.type.includes(type));
+  }
 
   res.render("pokemon", {
-    pokemons: resultPokemons,
-    types: types,
+    pokemons: filteredPokemons,
+    types,
   });
 });
 

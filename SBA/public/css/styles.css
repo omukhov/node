@@ -24,3 +24,8 @@ code {
   padding: 10px;
   margin: 10px 0;
 }
+
+.pokemon-type {
+  text-decoration: none;
+  color: #000;
+}

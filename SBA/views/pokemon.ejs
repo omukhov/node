@@ -19,8 +19,18 @@
           <h5 class="card-title"><%= pokemon.name %></h5>
 
           <p class="card-text">
-            <%= pokemon.type.map(id => { const t = types.find(type => type.id
-            === id); return t ? t.name : "Unknown"; }).join(", ") %>
+            <% for (let i = 0; i < pokemon.type.length; i++) { %> <% const id =
+            pokemon.type[i]; %> <% const t = types.find(type => type.id === id);
+            %>
+
+            <a href="/pokemons?type=<%= id %>" class="pokemon-type">
+              <%= t ? t.name : "Unknown" %>
+            </a>
+
+            <% if (i < pokemon.type.length - 1) { %>
+            ,
+            <% } %>
+            <% } %>
           </p>
 
           <p class="card-text">Level: <%= pokemon.level %></p>
