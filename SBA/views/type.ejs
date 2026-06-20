@@ -5,11 +5,13 @@
     <% types.forEach(type => { %>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
       <div class="card h-100">
-        <img
-          src="<%= type.img %>"
-          class="card-img-top"
-          alt="<%= type.name %>"
-        />
+        <a href="/pokemons?type=<%= type.id %>">
+          <img
+            src="<%= type.img %>"
+            class="card-img-top"
+            alt="<%= type.name %>"
+          />
+        </a>
 
         <div class="card-body">
           <h5 class="card-title"><%= type.name %></h5>
